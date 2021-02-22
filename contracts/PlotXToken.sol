@@ -22,7 +22,6 @@ contract PlotXToken is
         string memory name_,
         string memory symbol_,
         uint8 decimals_,
-        address _operator,
         address childChainManager
     ) public ERC20(name_, symbol_) {
         _setupContractId("ChildERC20");
@@ -30,75 +29,18 @@ contract PlotXToken is
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _setupRole(DEPOSITOR_ROLE, childChainManager);
         _initializeEIP712(name_);
-        operator = _operator;
-    }
-    
-    mapping(address => uint256) public lockedForGV;
-
-    address public operator;
-
-    modifier onlyOperator() {
-        require(_msgSender() == operator, "Not operator");
-        _;
-    }
-    
-     /**
-     * @dev change operator address
-     * @param _newOperator address of new operator
-     */
-    function changeOperator(address _newOperator)
-        public
-        onlyOperator
-        returns (bool)
-    {
-        require(_newOperator != address(0), "New operator cannot be 0 address");
-        operator = _newOperator;
-        return true;
-    }
-    
-      /**
-     * @dev Lock the user's tokens
-     * @param _of user's address.
-     */
-    function lockForGovernanceVote(address _of, uint256 _period)
-        public
-        onlyOperator
-    {
-        if (_period.add(now) > lockedForGV[_of])
-            lockedForGV[_of] = _period.add(now);
     }
 
-    function isLockedForGV(address _of) public view returns (bool) {
-        return (lockedForGV[_of] > now);
-    }
-    
      /**
      * @dev Transfer token for a specified address
      * @param to The address to transfer to.
      * @param value The amount to be transferred.
      */
     function transfer(address to, uint256 value) public returns (bool) {
-        require(lockedForGV[_msgSender()] < now, "Locked for governance"); // if not voted under governance
         _transfer(_msgSender(), to, value);
         return true;
     }
 
-    /**
-     * @dev Transfer tokens from one address to another
-     * @param from address The address which you want to send tokens from
-     * @param to address The address which you want to transfer to
-     * @param value uint256 the amount of tokens to be transferred
-     */
-    function transferFrom(
-        address from,
-        address to,
-        uint256 value
-    ) public returns (bool) {
-        require(lockedForGV[from] < now, "Locked for governance"); // if not voted under governance
-        super.transferFrom(from, to, value);
-        return true;
-    }
-    
     // This is to support Native meta transactions
     // never use msg.sender directly, use _msgSender() instead
     function _msgSender()
