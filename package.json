@@ -1,0 +1,25 @@
+{
+  "name": "plotx-polygon",
+  "version": "1.0.0",
+  "description": "PLOT",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plotx/token-Polygon.git"
+  },
+  "keywords": [
+    "PLOT"
+  ],
+  "author": "Team-PlotX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plotx/token-Polygon/issues"
+  },
+  "homepage": "https://github.com/plotx/token-Polygon#readme"
+}
