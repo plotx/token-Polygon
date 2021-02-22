@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/plotx/smart-contracts.svg?branch=master)](https://travis-ci.org/plotx/token-Polygon)
+
+[![Coverage Status](https://coveralls.io/repos/github/plotx/token-Polygon/badge.svg?branch=master)](https://coveralls.io/github/plotx/token-Polygon)
+
+
 # PLOT - L2
 - PLOT is native token of PlotX Platform and an ERC20 compatible token
 - This repo is for the L2 version of [PLOT token](https://etherscan.io/token/0x72F020f8f3E8fd9382705723Cd26380f8D0c66Bb).
