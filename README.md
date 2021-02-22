@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requirements
 ```
-Node >= 10.x
+Node >= 12.x
 ```
 ### Installing
 Firstly, you need to clone this repo. You can do so by downloading the repo as a zip and unpacking or using the following git command
