@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/plotx/smart-contracts.svg?branch=master)](https://travis-ci.org/plotx/token-Polygon)
+[![Build Status](https://travis-ci.org/plotx/token-Polygon.svg?branch=master)](https://travis-ci.org/plotx/token-Polygon)
 
 [![Coverage Status](https://coveralls.io/repos/github/plotx/token-Polygon/badge.svg?branch=master)](https://coveralls.io/github/plotx/token-Polygon)
 
