@@ -31,16 +31,6 @@ contract PlotXToken is
         _initializeEIP712(name_);
     }
 
-     /**
-     * @dev Transfer token for a specified address
-     * @param to The address to transfer to.
-     * @param value The amount to be transferred.
-     */
-    function transfer(address to, uint256 value) public returns (bool) {
-        _transfer(_msgSender(), to, value);
-        return true;
-    }
-
     // This is to support Native meta transactions
     // never use msg.sender directly, use _msgSender() instead
     function _msgSender()
