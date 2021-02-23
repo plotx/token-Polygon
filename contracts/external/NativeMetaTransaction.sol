@@ -1,7 +1,7 @@
-pragma solidity 0.5.7;
+pragma solidity 0.6.2;
 
 import "./EIP712/EIP712Base.sol";
-import "./openzeppelin-solidity/math/SafeMath.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract NativeMetaTransaction is EIP712Base {
     using SafeMath for uint256;
@@ -103,7 +103,7 @@ contract NativeMetaTransaction is EIP712Base {
     }
 
     function _msgSender()
-        internal
+        internal virtual
         view
         returns (address payable sender)
     {

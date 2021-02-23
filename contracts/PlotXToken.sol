@@ -1,9 +1,25 @@
-pragma solidity 0.5.7;
+pragma solidity 0.6.2;
 
-
-import "./external/openzeppelin-solidity/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "./external/NativeMetaTransaction.sol";
-import "./external/openzeppelin-solidity/access/AccessControlMixin.sol";
+import "openzeppelin-solidity/contracts/access/AccessControl.sol";
+// import "./AccessControl.sol";
+
+
+contract AccessControlMixin is AccessControl {
+    string private _revertMsg;
+    function _setupContractId(string memory contractId) internal {
+        _revertMsg = string(abi.encodePacked(contractId, ": INSUFFICIENT_PERMISSIONS"));
+    }
+
+    modifier only(bytes32 role) {
+        require(
+            hasRole(role, _msgSender()),
+            _revertMsg
+        );
+        _;
+    }
+}
 
 interface IChildToken {
     function deposit(address user, bytes calldata depositData) external;
@@ -34,7 +50,7 @@ contract PlotXToken is
     // This is to support Native meta transactions
     // never use msg.sender directly, use _msgSender() instead
     function _msgSender()
-        internal
+        internal override(Context, NativeMetaTransaction)
         view
         returns (address payable sender)
     {
@@ -50,7 +66,7 @@ contract PlotXToken is
      * @param depositData abi encoded amount
      */
     function deposit(address user, bytes calldata depositData)
-        external
+        external override
         only(DEPOSITOR_ROLE)
     {
         uint256 amount = abi.decode(depositData, (uint256));
